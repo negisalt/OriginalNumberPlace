@@ -3,13 +3,45 @@ let initialBoard = [];
 let currentBoard = [];
 let pieceLayout = [];
 let selectedCell = null;
+let currentDifficulty = 'tutorial';
+let clearCount = parseInt(localStorage.getItem('sudoku_clear_count') || '0');
+
+const DIFFICULTY_SETTINGS = {
+    'tutorial': { clues: 11, name: 'Tutorial', label: 'チュートリアル' },
+    'normal': { clues: 9, name: 'Normal', label: '普通' },
+    'hard': { clues: 7, name: 'Hard', label: '難問' },
+    'special': { clues: 6, name: 'Special', label: 'スペシャル' }
+};
+
+/**
+ * Detects the difficulty from the current URL filename
+ */
+function detectDifficulty() {
+    const path = window.location.pathname;
+    if (path.includes('normal.html')) return 'normal';
+    if (path.includes('hard.html')) return 'hard';
+    if (path.includes('special.html')) return 'special';
+    return 'tutorial'; // default (index.html)
+}
+
+/**
+ * Updates the clear count in the UI and localStorage
+ */
+function updateClearCount(increment = false) {
+    if (increment) {
+        clearCount++;
+        localStorage.setItem('sudoku_clear_count', clearCount);
+    }
+    const countEl = document.querySelector('.sidebar-section p');
+    if (countEl) countEl.textContent = `クリア回数: ${clearCount}`;
+}
 
 // --- Logic functions ---
 
 /**
  * Generates a complete 5x5 Jigsaw Sudoku puzzle
  */
-function generateGrid() {
+function generateGrid(difficulty) {
     const grid = Array(5).fill(0).map(() => Array(5).fill(0));
     
     function generatePieces() {
@@ -113,10 +145,17 @@ function generateGrid() {
     for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) positions.push([r, c]);
     positions.sort(() => Math.random() - 0.5);
 
+    const settings = DIFFICULTY_SETTINGS[difficulty] || DIFFICULTY_SETTINGS['tutorial'];
+    const targetClues = settings.clues;
+    let currentClues = 25;
+
     for (const [r, c] of positions) {
+        if (currentClues <= targetClues) break;
         const temp = puzzle[r][c];
         puzzle[r][c] = 0;
-        if (countSolutions(puzzle, pLayout, 0, 2) !== 1) {
+        if (countSolutions(puzzle, pLayout, 0, 2) === 1) {
+            currentClues--;
+        } else {
             puzzle[r][c] = temp;
         }
     }
@@ -215,6 +254,7 @@ function checkSolution() {
 
     if (isCorrect) {
         updateMessage("正解！おめでとう！<br>君ならもっと難しい問題も解けるかもね。");
+        updateClearCount(true);
         alert("クリア！おめでとう！");
     } else {
         updateMessage("残念、どこかが間違っているみたい。<br>縦・横・太枠のルールを確認してね。");
@@ -387,7 +427,7 @@ function newGame() {
     
     // Use setTimeout to allow UI to show loader
     setTimeout(() => {
-        const data = generateGrid();
+        const data = generateGrid(currentDifficulty);
         solution = data.solution;
         initialBoard = data.puzzle;
         currentBoard = JSON.parse(JSON.stringify(initialBoard));
@@ -414,5 +454,53 @@ document.addEventListener('keydown', (e) => {
 
 // Initialization on load
 window.addEventListener('DOMContentLoaded', () => {
+    currentDifficulty = detectDifficulty();
+    
+    // Update active class in sidebar
+    const links = document.querySelectorAll('#difficulty-list a');
+    links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === window.location.pathname.split('/').pop() || 
+            (link.getAttribute('href') === 'index.html' && (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html')))) {
+            link.classList.add('active');
+        }
+    });
+
+    // Update header title
+    const settings = DIFFICULTY_SETTINGS[currentDifficulty];
+    document.querySelector('header h1').textContent = `オリジナルナンプレ - ${settings.label}`;
+    document.title = `オリジナルナンプレ - ${settings.label}`;
+
+    updateClearCount();
     newGame();
+
+    // ARG Event: Special difficulty triggers a timer
+    if (currentDifficulty === 'special') {
+        setTimeout(() => {
+            triggerArgEvent();
+        }, 20000); // 20 seconds
+    }
 });
+
+/**
+ * Triggers the ARG event where a mysterious ad appears
+ */
+function triggerArgEvent() {
+    // Create the ad element if it doesn't exist
+    if (!document.querySelector('.mysterious-ad')) {
+        const ad = document.createElement('div');
+        ad.className = 'mysterious-ad';
+        document.body.appendChild(ad);
+        
+        // Use timeout to trigger CSS transition
+        setTimeout(() => {
+            ad.classList.add('visible');
+            updateMessage("おかしいな...。このサイトには広告はないはずなのに。");
+            
+            // Further dialogue after a short pause
+            setTimeout(() => {
+                updateMessage("おかしいな...。このサイトには広告はないはずなのに。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝ってくれませんか？");
+            }, 5000);
+        }, 100);
+    }
+}

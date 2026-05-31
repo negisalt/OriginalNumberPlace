@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>オリジナルナンプレ - ゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loading" class="loading-overlay">盤面を生成中...</div>
+
+<header>
+    <h1>オリジナルナンプレ</h1>
+    <p>5x5 ジグソーナンプレ</p>
+</header>
+
+<main class="main-content">
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3>難易度選択</h3>
+            <ul id="difficulty-list">
+                <li><a href="index.html">チュートリアル</a></li>
+                <li><a href="normal.html">普通</a></li>
+                <li><a href="hard.html">難問</a></li>
+                <li><a href="special.html">スペシャル</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-section">
+            <h3>統計</h3>
+            <p style="font-size: 14px; color: #666; padding: 0 14px;">クリア回数: 0</p>
+        </div>
+    </aside>
+
+    <div class="game-area" id="page-content">
+        <p>難易度を選択してください。</p>
+    </div>
+</main>
+
+<div class="footer">
+    <a href="#">Github</a>
+    <a href="#">X (Twitter)</a>
+    <a href="#">Develop Page</a>
+    <span>&copy; 2026 Unity禁止ゲームジャム</span>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
