@@ -241,7 +241,7 @@ function checkSolution() {
     }
 
     if (!isComplete) {
-        updateMessage("まだ空いているマスがあるよ。全部埋めてみてね。");
+        updateMessage("まだ空いているマスがあります。全部埋めてから答え合わせをしてください。");
         return;
     }
 
@@ -253,11 +253,11 @@ function checkSolution() {
     }
 
     if (isCorrect) {
-        updateMessage("正解！おめでとう！<br>君ならもっと難しい問題も解けるかもね。");
+        updateMessage("正解。おめでとうございます。<br>あなたならもっと難しい問題も解けるかもしれません。");
         updateClearCount(true);
-        alert("クリア！おめでとう！");
+        alert("Clear");
     } else {
-        updateMessage("残念、どこかが間違っているみたい。<br>縦・横・太枠のルールを確認してね。");
+        updateMessage("残念。どこか間違ってます。<br>ルールをちゃんと確認してください。");
     }
 }
 
@@ -368,7 +368,7 @@ function giveHint() {
             for (let c = 0; c < 5; c++) if (currentBoard[r][c] === 0) empties.push({ r, c });
         }
         if (empties.length === 0) {
-            updateMessage("もう全部埋まっているよ！答え合わせをしてみて。");
+            updateMessage("もう全部のマスが埋まってます。答え合わせをしてみてください。");
             return;
         }
         const random = empties[Math.floor(Math.random() * empties.length)];
@@ -382,19 +382,19 @@ function giveHint() {
     let msg = "";
     switch(type) {
         case 'naked':
-            msg = `マス (${r+1}, ${c+1}) を見てみて。ここには数字の <b>${val}</b> しか入らないみたいだよ。`;
+            msg = `マス (${r+1}, ${c+1}) を見てみてください。ここは <b>${val}</b> しか入りません。`;
             break;
         case 'hidden_row':
-            msg = `${r+1}行目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけみたい。`;
+            msg = `${r+1}行目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです。`;
             break;
         case 'hidden_col':
-            msg = `${c+1}列目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけだよ。`;
+            msg = `${c+1}列目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです。`;
             break;
         case 'hidden_piece':
-            msg = `この太枠ブロックの中で、数字の <b>${val}</b> が入れるのはこのマスだけだね。`;
+            msg = `この太枠ブロックの中で、数字の <b>${val}</b> が入れるのはこのマスだけです。`;
             break;
         default:
-            msg = `ヒントだよ。このマスには <b>${val}</b> が入るはず。考えてみて！`;
+            msg = `分からないんですか？仕方ないですね、ヒントです。このマスには <b>${val}</b> が入ります。`;
     }
     
     updateMessage(msg);
@@ -415,7 +415,7 @@ function giveHint() {
 function resetBoard() {
     currentBoard = JSON.parse(JSON.stringify(initialBoard));
     initGrid();
-    updateMessage("盤面を最初に戻したよ。頑張って！");
+    updateMessage("盤面を最初に戻しました。頑張ってください。");
 }
 
 /**
@@ -435,7 +435,7 @@ function newGame() {
         
         initGrid();
         loader.style.display = 'none';
-        updateMessage("新しい盤面を作ったよ！挑戦してみて。");
+        updateMessage("新しい盤面が生成されました。挑戦してみてください。");
     }, 10);
 }
 
@@ -495,11 +495,11 @@ function triggerArgEvent() {
         // Use timeout to trigger CSS transition
         setTimeout(() => {
             ad.classList.add('visible');
-            updateMessage("おかしいな...。このサイトには広告はないはずなのに。");
+            updateMessage("おかしいですね...。このサイトには広告はないはずなのですが...。");
             
             // Further dialogue after a short pause
             setTimeout(() => {
-                updateMessage("おかしいな...。このサイトには広告はないはずなのに。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝ってくれませんか？");
+                updateMessage("おかしいですね...。このサイトには広告はないはずなのですが...。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝っていただけませんか？");
             }, 5000);
         }, 100);
     }
