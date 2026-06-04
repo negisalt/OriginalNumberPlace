@@ -1,0 +1,33 @@
+/**HTMLのデフォルトでpadding:5;になるので、**/
+/**paddingを0に指定しないと画面いっぱいにレイアウトできなくなります。**/
+html,body{
+  padding:0;
+  margin:0;
+}
+/**scrollのバーが邪魔になって画面がズレるので**/
+/**widthとheightは100vh、100vwで画面いっぱいにしておきます。**/
+.base{
+  display:flex;
+  flex-direction:row;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+}
+/**iframeを表示する領域。**/
+.left{
+ width:15%;
+ height:100%;
+}
+/**iframe内のページの広さをiframeの幅に合わせる。**/
+/**これがないと縦だけでなく横方面にもスクロールバーが出てみっともないです。**/
+.menu{
+	width:100%;
+}
+/**右のメインになる画面です。**/
+.right{
+ width:85%;
+ height:100%;
+ text-align: center;
+ overflow-y:scroll;
+ background-image:url(images/image.gif);
+}

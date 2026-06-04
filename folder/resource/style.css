@@ -1,0 +1,72 @@
+:root {
+    --bg-color: #c9e3f1;
+    --cell-size: 80px;
+    --border-thick: 2px solid #333335;
+    --border-thin: 1px solid #999;
+    --primary-color: #4a90e2;
+    --text-color: #333;
+    --fixed-color: #000;
+    --input-color: #2c5282;
+    --selected-bg: #e1f5fe;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 5px;
+}
+
+.def {
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    padding: 24px 30px;
+    margin: 5px 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+.def h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 5px;
+}
+
+.def ul {
+    padding-left: 20px;
+}
+
+.def li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.footer {
+    margin-top: 50px;
+    font-size: 13px;
+    color: #718096;
+    display: flex;
+    gap: 20px;
+}
+
+.footer a {
+    color: #4a5568;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
