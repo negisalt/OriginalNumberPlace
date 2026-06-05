@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5x5 ミニナンプレ</title>
+    <link rel="stylesheet" href="css/old.css"> 
+</head>
+<body>
+
+    <h1>5×5 ミニナンプレ</h1>
+    <p>縦・横の各列に1〜5の数字が1つずつ入るように埋めてください。</p>
+
+    <div class="board" id="board"></div>
+
+    <div class="controls">
+        <button onclick="checkAnswer()">答え合わせ</button>
+        <button onclick="initGame()">新しい盤面</button>
+        <div id="message"></div>
+    </div>
+
+    <script src="js/old.js"></script>
+</body>
+</html>

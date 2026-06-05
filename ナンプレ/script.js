@@ -211,7 +211,7 @@ function selectCell(r, c) {
     selectedCell = { r, c };
     const newCell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
     newCell.classList.add('selected');
-    updateMessage(`マス (${r+1}, ${c+1}) を選択中。`);
+    updateMessage(`マス (${r+1}, ${c+1}) を選択中です！`);
 }
 
 /**
@@ -241,7 +241,7 @@ function checkSolution() {
     }
 
     if (!isComplete) {
-        updateMessage("まだ空いているマスがあります。全部埋めてから答え合わせをしてください。");
+        updateMessage("まだ空いているマスがあります！全部埋めてから答え合わせをしてね。");
         return;
     }
 
@@ -253,11 +253,11 @@ function checkSolution() {
     }
 
     if (isCorrect) {
-        updateMessage("正解。おめでとうございます。<br>あなたならもっと難しい問題も解けるかもしれません。");
+        updateMessage("正解！おめでとうございます。<br>君ならもっと難しい問題も解けるかもしれないね！");
         updateClearCount(true);
-        alert("Clear");
+        alert("クリア");
     } else {
-        updateMessage("残念。どこか間違ってます。<br>ルールをちゃんと確認してください。");
+        updateMessage("残念...どこか間違っているみたいです...。<br>盤面をもう一度見直してみましょう。");
     }
 }
 
@@ -368,7 +368,7 @@ function giveHint() {
             for (let c = 0; c < 5; c++) if (currentBoard[r][c] === 0) empties.push({ r, c });
         }
         if (empties.length === 0) {
-            updateMessage("もう全部のマスが埋まってます。答え合わせをしてみてください。");
+            updateMessage("もう全部のマスが埋まりました！答え合わせをしてみてください。");
             return;
         }
         const random = empties[Math.floor(Math.random() * empties.length)];
@@ -382,19 +382,19 @@ function giveHint() {
     let msg = "";
     switch(type) {
         case 'naked':
-            msg = `マス (${r+1}, ${c+1}) を見てみてください。ここは <b>${val}</b> しか入りません。`;
+            msg = `マス (${r+1}, ${c+1}) を見てみてください！ここには消去法で <b>${val}</b> しか入らないですよ！`;
             break;
         case 'hidden_row':
-            msg = `${r+1}行目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです。`;
+            msg = `${r+1}行目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです！`;
             break;
         case 'hidden_col':
-            msg = `${c+1}列目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです。`;
+            msg = `${c+1}列目の中で、数字の <b>${val}</b> が入れるのはここ (${r+1}, ${c+1}) だけです！`;
             break;
         case 'hidden_piece':
-            msg = `この太枠ブロックの中で、数字の <b>${val}</b> が入れるのはこのマスだけです。`;
+            msg = `この太枠ブロックの中で、数字の <b>${val}</b> が入れるのはこのマスだけです！`;
             break;
         default:
-            msg = `分からないんですか？仕方ないですね、ヒントです。このマスには <b>${val}</b> が入ります。`;
+            msg = `少し難しいですね...。では特別なヒントです！このマスには <b>${val}</b> が入ります！`;
     }
     
     updateMessage(msg);
@@ -415,7 +415,7 @@ function giveHint() {
 function resetBoard() {
     currentBoard = JSON.parse(JSON.stringify(initialBoard));
     initGrid();
-    updateMessage("盤面を最初に戻しました。頑張ってください。");
+    updateMessage("盤面を最初に戻しました！頑張ってくださいね。");
 }
 
 /**
@@ -435,7 +435,7 @@ function newGame() {
         
         initGrid();
         loader.style.display = 'none';
-        updateMessage("新しい盤面が生成されました。挑戦してみてください。");
+        updateMessage("新しい盤面が生成されました！挑戦してみてください！");
     }, 10);
 }
 
