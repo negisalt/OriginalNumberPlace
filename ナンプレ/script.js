@@ -483,24 +483,50 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Triggers the ARG event where a mysterious ad appears
+ * Triggers the ARG event where a mysterious ad appears and assistant speaks directly
  */
 function triggerArgEvent() {
-    // Create the ad element if it doesn't exist
+    // Create the overlay and dialog if they don't exist
+    if (!document.getElementById('arg-overlay')) {
+        const overlay = document.createElement('div');
+        overlay.id = 'arg-overlay';
+        overlay.className = 'arg-overlay';
+        overlay.innerHTML = `
+            <div class="arg-dialog-box">
+                <div class="arg-dialog-header">アシスタントA</div>
+                <div id="arg-dialog-content" class="arg-dialog-content"></div>
+                <div class="arg-dialog-footer">
+                    <button class="arg-dialog-button" onclick="closeArgDialog()">閉じる</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    }
+
     if (!document.querySelector('.mysterious-ad')) {
         const ad = document.createElement('div');
         ad.className = 'mysterious-ad';
         document.body.appendChild(ad);
         
-        // Use timeout to trigger CSS transition
         setTimeout(() => {
             ad.classList.add('visible');
-            updateMessage("おかしいですね...。このサイトには広告はないはずなのですが...。");
+            showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。");
             
-            // Further dialogue after a short pause
             setTimeout(() => {
-                updateMessage("おかしいですね...。このサイトには広告はないはずなのですが...。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝っていただけませんか？");
-            }, 5000);
+                showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝っていただけませんか？");
+            }, 6000);
         }, 100);
     }
+}
+
+function showArgDialog(text) {
+    const overlay = document.getElementById('arg-overlay');
+    const content = document.getElementById('arg-dialog-content');
+    content.innerHTML = text;
+    overlay.classList.add('visible');
+}
+
+function closeArgDialog() {
+    const overlay = document.getElementById('arg-overlay');
+    overlay.classList.remove('visible');
 }

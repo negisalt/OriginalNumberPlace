@@ -1,33 +1,129 @@
-/**HTMLのデフォルトでpadding:5;になるので、**/
-/**paddingを0に指定しないと画面いっぱいにレイアウトできなくなります。**/
-html,body{
-  padding:0;
-  margin:0;
+/** 共通設定 **/
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  /* 平成レトロといえばMS Ｐゴシック */
+  font-family: "MS PGothic", "Osaka", "Courier New", sans-serif;
+  background-color: #ffffff;
 }
-/**scrollのバーが邪魔になって画面がズレるので**/
-/**widthとheightは100vh、100vwで画面いっぱいにしておきます。**/
-.base{
-  display:flex;
-  flex-direction:row;
-  width:100vw;
-  height:100vh;
-  overflow:hidden;
+
+.base {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
-/**iframeを表示する領域。**/
-.left{
- width:15%;
- height:100%;
+
+/** 左：サイドバー（iframeを表示する領域） **/
+.left {
+  width: 200px;
+  height: 100%;
+  border-right: 2px dotted #999; /* 点線の境界線 */
+  background-color: #f0f0f0;
 }
-/**iframe内のページの広さをiframeの幅に合わせる。**/
-/**これがないと縦だけでなく横方面にもスクロールバーが出てみっともないです。**/
-.menu{
-	width:100%;
+
+iframe {
+  border: none;
 }
-/**右のメインになる画面です。**/
-.right{
- width:85%;
- height:100%;
- text-align: center;
- overflow-y:scroll;
- background-image:url(images/image.gif);
+
+/** 右：メイン画面 **/
+.right {
+  flex-grow: 1;
+  height: 100%;
+  text-align: center;
+  overflow-y: scroll;
+  /* 背景画像がタイル状に並ぶのがお約束 */
+  background-image: url(images/image.gif);
+  background-repeat: repeat;
+  padding: 20px;
+}
+
+.right h1 {
+  font-size: 24px;
+  color: #000080; /* ネイビーブルー */
+  margin-top: 50px;
+}
+
+.right b {
+  color: #ff0000;
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+}
+
+/** menu.html用のスタイル **/
+.menu-body {
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+
+.menu-container {
+  text-align: center;
+}
+
+.menu-title {
+  background-color: #000080;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 2px;
+  margin-bottom: 15px;
+  border: 1px outset #ffffff;
+}
+
+.menu-section {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.menu-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.menu-section li {
+  font-size: 14px;
+  margin-bottom: 5px;
+  padding-left: 15px;
+}
+
+/* リストの先頭に★をつける */
+.menu-section li::before {
+  content: "★";
+  color: #ff6600;
+  margin-right: 5px;
+  font-size: 10px;
+}
+
+.menu-section a {
+  color: #0000ff; /* 青色リンク */
+  text-decoration: none;
+}
+
+.menu-section a:visited {
+  color: #800080; /* 紫色リンク */
+}
+
+.menu-section a:hover {
+  text-decoration: underline;
+  background-color: #ffff00; /* 黄色のハイライト */
+}
+
+.menu-footer {
+  font-size: 11px;
+  color: #333;
+  margin-top: 30px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed #999;
 }

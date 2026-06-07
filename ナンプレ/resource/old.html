@@ -17,10 +17,10 @@
         <button onclick="checkAnswer()">答え合わせ</button>
         <button onclick="initGame()">新しい盤面</button>
 
-        <form action="/old" method="get">
-            <p>シード値入力<input type="text" name="ナンプレ"></p>
-            <button type="submit">生成</button> // 途中
-        </form>
+        <div class="seed-area">
+            <p>シード値入力<input type="text" id="seedInput" maxlength="8" placeholder="8桁の英数字"></p>
+            <button onclick="generateBySeed()">生成</button>
+        </div>
         
 
         <h2>ーーー</h2>

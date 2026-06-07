@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>オリジナルナンプレ - 途中</title>
+    <title>オリジナルナンプレ - 開発中</title>
     <link rel="stylesheet" href="css/develop.css">
 </head>
 <body>
@@ -11,16 +11,16 @@
 
 <header>
     <h1>オリジナルナンプレ</h1>
-    <p>5x5 ナンプレ</p>
+    <p>6x6 ナンプレ - 開発中</p>
 
     <nav class="difficulity">
-        <ul>
-            <a href="#home">HOME</a>
-            <a href="#easy">EASY</a>
-            <a href="#normal">NORMAL</a>
-            <a href="#hard">HARD</a>
-            <a href="#devil">DEVIL</a>
-            <a href="#special">SPECIAL</a>
+        <ul id="difficulty-list">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#easy">EASY</a></li>
+            <li><a href="#normal">NORMAL</a></li>
+            <li><a href="#hard">HARD</a></li>
+            <li><a href="#devil">DEVIL</a></li>
+            <li><a href="#special">SPECIAL</a></li>
         </ul>
     </nav>
 </header>
@@ -28,14 +28,46 @@
 <main class="main-content">
     <div class="game-area">
         <div class="game-container">
-            <div class="grid">
-                <!-- java側で生成する予定 -->
+            <div id="sudoku-grid">
+                <!-- JavaScript側で生成 -->
             </div>
 
-            <div class="numpad">
-
+            <div class="controls">
+                <div class="numpad">
+                    <button onclick="inputNumber(1)">1</button>
+                    <button onclick="inputNumber(2)">2</button>
+                    <button onclick="inputNumber(3)">3</button>
+                    <button onclick="inputNumber(4)">4</button>
+                    <button onclick="inputNumber(5)">5</button>
+                    <button onclick="inputNumber(6)">6</button>
+                    <button class="clear" onclick="inputNumber(null)" style="grid-column: span 3;">Clear</button>
+                </div>
+                <button class="primary" onclick="checkSolution()">答え合わせ</button>
+                <button onclick="giveHint()">ヒント</button>
+                <button onclick="newGame()">新しい盤面</button>
+                <button onclick="resetBoard()">最初から</button>
             </div>
         </div>
+
+        <div class="assist">
+            <h2>アシスタント</h2>
+            <div id="assistant-message">
+                難易度を選んで「新しい盤面」を押してね！
+            </div>
+            <textarea id="hint-box" readonly style="width: 100%; margin-top: 10px; height: 60px; resize: none; border-radius: 8px; border: 1px solid #cbd5e0; padding: 10px; box-sizing: border-box;"></textarea>
+        </div>
+
+        <div class="rules">
+            <h2>ルール</h2>
+            <ul>
+                <li>縦・横の各列に、1から6までの数字が1つずつ入るように埋めてください。</li>
+                <li>太枠で囲まれた各ブロック内にも、1から6までの数字が1つずつ入るようにします。</li>
+                <li>すべてのマスを正しく埋めればクリアです！</li>
+            </ul>
+        </div>
     </div>
-    
 </main>
+
+<script src="js/develop.js"></script>
+</body>
+</html>

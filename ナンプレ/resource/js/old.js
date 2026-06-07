@@ -1,5 +1,8 @@
 const boardElement = document.getElementById('board');
 const messageElement = document.getElementById('message');
+
+// 特殊な盤面に移行するための特定のワード（後で変更可能）
+const SPECIAL_WORD = 'secret99';
       
 // ★ ここで消すマスの数を調整できます（25未満にしてください）
 const HOLES_COUNT = 13; 
@@ -142,6 +145,27 @@ function checkAnswer() {
 function showMessage(text, type) {
    messageElement.textContent = text;
    messageElement.className = type;
+}
+
+// シード値による盤面生成
+function generateBySeed() {
+   const seedInput = document.getElementById('seedInput');
+   const seed = seedInput.value;
+
+   if (seed === SPECIAL_WORD) {
+      alert('特殊な盤面に移行します（実装予定）');
+      // 特殊な盤面については未定のため、とりあえずログを出して終了
+      console.log('Special board triggered by seed:', seed);
+      return;
+   }
+
+   // 8桁の数字・英小文字のバリデーション
+   const seedRegex = /^[0-9a-z]{8}$/;
+   if (seedRegex.test(seed)) {
+      initGame();
+   } else {
+      alert('シード値は8桁の数字・英小文字で入力してください。');
+   }
 }
 
 // 起動時にゲームを生成

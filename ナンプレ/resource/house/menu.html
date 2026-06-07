@@ -1,16 +1,47 @@
 <!DOCTYPE html>
+<html lang="ja">
 <head>
-<html lang="jp">
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <base target="right_frame"> <!-- メイン画面を右フレームで開くための設定（iframe名に合わせる必要あり） -->
 </head>
 
-<body>
-  <menu>
-    <ul>
-      <li>トップページ</li>
-      <li><a href="https://apricot-design.com/staffblog/staffblog/90s-site/">first</a></li>
-    </ul>
-      
+<body class="menu-body">
+  <div class="menu-container">
+    <div class="menu-title">MENU</div>
+    
+    <div class="menu-section">
+      <div class="section-label">◆ MAIN ◆</div>
+      <ul>
+        <li><a href="house.html" target="_parent">TOP</a></li>
+        <li><a href="#">ABOUT</a></li>
+        <li><a href="#">DIARY</a></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <div class="section-label">◆ CONTENTS ◆</div>
+      <ul>
+        <li><a href="#">GALLERY</a></li>
+        <li><a href="../develop.html" target="_top">NAMPURE</a></li>
+        <li><a href="#">BBS</a></li>
+      </ul>
+    </div>
+
+    <div class="menu-section">
+      <div class="section-label">◆ LINK ◆</div>
+      <ul>
+        <li><a href="#">SEARCH</a></li>
+        <li><a href="#">MY FRIENDS</a></li>
+      </ul>
+    </div>
+
+    <div class="menu-footer">
+      <hr>
+      Since: 2026/01/01<br>
+      Last Update:<br>
+      2026/06/07
+    </div>
   </div>
 </body>
+</html>

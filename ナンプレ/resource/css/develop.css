@@ -26,6 +26,12 @@ header nav ul {
     border-bottom: 2px solid #a9ccdf;
     background-color: #ffffff;
     padding: 10px 0 5px;
+    list-style: none;
+}
+
+header nav ul a.active {
+    color: var(--primary-color);
+    text-decoration: underline;
 }
 
 header nav ul a {
@@ -37,8 +43,8 @@ header nav ul a {
 }
 
 header nav ul a:hover{
-    color: #010e1d;
-    text-decoration: underline double #04294e;
+    color: var(--primary-color);
+    text-decoration: underline double var(--primary-color);
 }
 
 body {
@@ -122,8 +128,8 @@ body {
 
 #sudoku-grid {
     display: grid;
-    grid-template-columns: repeat(5, var(--cell-size));
-    grid-template-rows: repeat(5, var(--cell-size));
+    grid-template-columns: repeat(6, var(--cell-size));
+    grid-template-rows: repeat(6, var(--cell-size));
     user-select: none;
     background-color: #000; /* For outer border */
     border: 2px solid #000;
