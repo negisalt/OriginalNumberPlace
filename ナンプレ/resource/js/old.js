@@ -136,7 +136,7 @@ function checkAnswer() {
       }
    }
 
-   showMessage('正解です！お見事！🎉', 'success');
+   showMessage('正解です！お見事です！', 'success');
 }
 
 function showMessage(text, type) {
