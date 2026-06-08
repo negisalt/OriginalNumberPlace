@@ -1,0 +1,114 @@
+:root {
+   --bg-color: #c9e3f1;
+   --primary-color: #4a90e2;
+   --text-color: #333;
+}
+
+header {
+   text-align: center;
+   margin-bottom: 10px;
+}
+
+body {
+   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+   background-color: var(--bg-color);
+   color: var(--text-color);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 0;
+   padding: 5px;
+}
+
+.anime {
+   animation-name: fadeIn;
+   animation-duration: 1.5s;
+   animation-timing-function: ease-in-out;
+   animation-iteration-count: infinite;
+}
+
+.anime_p {
+   animation-name: rotation;
+   animation-duration: 3s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+}
+
+.anime_sk {
+   animation-name: skewing;
+   animation-duration: 2s;
+   animation-timing-function: ease-in-out;
+   animation-iteration-count: infinite;
+}
+
+.all-in {
+   animation-name: all-in;
+   animation-duration: 4s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+}
+
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+      transform: translateY(20px);
+   }
+   50% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+   100% {
+      opacity: 0;
+      transform: translateY(-20px);
+   }
+}
+
+@keyframes rotation {
+   0% {
+      /* transform: scaleY(0.5); */
+      transform: rotateY(0deg);
+   }
+   50% {
+      /* transform: scaleY(0.5); */
+      transform: rotateY(180deg);
+   }
+   100% {
+      transform: rotateY(360deg);
+   }
+}
+
+@keyframes skewing {
+   0% {
+      transform: skew(45deg);
+   }
+   50% {
+      transform: skew(-45deg);
+   }
+   100% {
+      transform: skew(45deg);
+   }
+}
+
+@keyframes all-in {
+   0% {
+      transform: translateY(20px) rotateY(0deg) scale(0.5) skew(30deg);
+   }
+   50% {
+      transform: translateY(-20px) rotateY(180deg) scale(1.5) skew(-30deg);
+   }
+   100% {
+      transform: translateY(20px) rotateY(360deg) scale(0.5) skew(30deg);
+   }
+}
+
+/* デモ用のスタイル */
+.box {
+   width: 300px;
+   padding: 40px;
+   margin: 50px auto;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   color: white;
+   border-radius: 10px;
+   text-align: center;
+   font-size: 50px;
+}
