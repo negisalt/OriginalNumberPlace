@@ -510,12 +510,20 @@ function triggerArgEvent() {
         
         setTimeout(() => {
             ad.classList.add('visible');
-            showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。");
-            
-            setTimeout(() => {
-                showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝っていただけませんか？");
-            }, 6000);
         }, 100);
+        setTimeout(() => {
+            ad.classList.remove('visible');
+        }, 500);
+        setTimeout(() => {
+            showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。");
+        }, 2000);
+        setTimeout(() => {
+            showArgDialog("おかしいですね...。このサイトには広告はないはずなのですが...。<br><br>すみません、ちょっとこのサイトの様子が変みたいです。良ければ一緒に調査を手伝っていただけませんか？");
+        }, 6000);
+        setTimeout(() => {
+            showArgDialog("こちらのページに来ていただけますか？");
+            
+        }, 5000)
     }
 }
 

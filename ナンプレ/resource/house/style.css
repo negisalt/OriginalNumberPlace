@@ -18,7 +18,7 @@ html, body {
 
 /** 左：サイドバー（iframeを表示する領域） **/
 .left {
-  width: 200px;
+  width: 240px;
   height: 100%;
   border-right: 2px dotted #999; /* 点線の境界線 */
   background-color: #f0f0f0;
