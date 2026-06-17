@@ -127,3 +127,121 @@ hr {
   border: 0;
   border-top: 1px dashed #999;
 }
+
+/** Win95風 ダイアログスタイル **/
+.win95-window {
+  position: absolute; /* 絶対配置。HTML側のstyle属性でtop/leftを指定可能 */
+  width: 400px;
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  text-align: left;
+  z-index: 100;
+  padding: 2px;
+}
+
+.win95-titlebar {
+  background: linear-gradient(90deg, #000080 0%, #0080ff 100%);
+  color: white;
+  padding: 3px 5px;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.win95-title {
+  margin-right: 10px;
+}
+
+.win95-close {
+  width: 14px;
+  height: 14px;
+  background-color: #c0c0c0;
+  border: 1px outset #ffffff;
+  color: black;
+  text-align: center;
+  line-height: 12px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.win95-content {
+  padding: 10px;
+  border: 1px inset #ffffff;
+  margin-top: 2px;
+  background-color: #f0f0f0;
+}
+
+.dialogue-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.dialogue-icon-container {
+  flex-shrink: 0;
+}
+
+.dialogue-icon-placeholder {
+  width: 54px;
+  height: 54px;
+  background-color: #c0c0c0;
+  border: 1px inset #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000080;
+}
+
+.dialogue-icon-image {
+  width: 54px;
+  height: 54px;
+}
+
+.dialogue-main-text {
+  flex-grow: 1;
+}
+
+.dialogue-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000080;
+  margin-bottom: 5px;
+  border-bottom: 1px dotted #999;
+}
+
+.dialogue-text {
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 60px;
+}
+
+.dialogue-footer {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.win95-button {
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  padding: 3px 15px;
+  font-family: "MS PGothic", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.win95-button:active {
+  border: 2px inset #ffffff;
+  padding: 4px 14px 2px 16px;
+}
+
+h1 {
+  font-size: 100px;
+  color: #000080; /* ネイビーブルー */
+  margin-top: 30px;
+}

@@ -15,16 +15,49 @@
       <!-- 右：メインコンテンツ -->
       <div class="right" name="right_frame">
          <marquee scrollamount="5" width="80%">
-            <h1>～～ようこそなつかし(?)のホームページへ～～</h1>
+            <h1>～～ようこそリリィの部屋へ～～</h1>
          </marquee>
          
-         <div style="margin-top: 30px; border: 1px double #999; display: inline-block; padding: 10px; background-color: #fff;">
+         <div style="margin: 30px auto; border: 1px double #999; width: fit-content; padding: 10px; background-color: #fff;">
             あなたは<b> 0000 </b>番目の来訪者です！<br>
             <span style="font-size: 10px;">（キリ番踏んだら掲示板に報告してね！）</span>
          </div>
 
-         <div style="margin-top: 50px;">
-            <img src="images/image.gif" alt="welcome" border="0">
+         <canvas id="backgroundCanvas" width="800" height="600" style="position: absolute; top: 0; left: 0; z-index: -1;"></canvas>
+
+         <div style="margin: 30px auto; border: 1px double #999; width: fit-content; padding: 50px; background-color: #fff;">
+            <h1>現在 大工事中！！</h1>
+            <p>ただいまサイトの作成中です。<br>
+               いくつかのコンテンツが表示されないです。<br>
+               ご迷惑をおかけしますが、ご了承ください。</p>
+         </div>
+
+         <!-- アシスタントダイアログ (絶対配置・アイコンスペース付き) -->
+         <div id="assistant-window" class="win95-window" style="top: 400px; left: 500px;">
+            <div class="win95-titlebar">
+               <span class="win95-title">Assistant - Conversation</span>
+               <div class="win95-close">×</div>
+            </div>
+            <div class="win95-content">
+               <div class="dialogue-body">
+                  <div class="dialogue-icon-container">
+                     <div id="dialogue-icon" class="dialogue-icon-placeholder">
+                        <!-- アイコン画像がここに入ります -->
+                        ？
+                     </div>
+                  </div>
+                  <div class="dialogue-main-text">
+                     <div class="dialogue-name" id="dialogue-name">リリィ</div>
+                     <div class="dialogue-text" id="dialogue-text">
+                        ……あ、……こんにちは！<br>
+                        よくここまで辿り着きましたね。
+                     </div>
+                  </div>
+               </div>
+               <div class="dialogue-footer">
+                  <button class="win95-button" onclick="nextDialogue()">次へ ＞</button>
+               </div>
+            </div>
          </div>
 
          <p style="margin-top: 200px; font-size: 12px;">
@@ -33,5 +66,6 @@
          </p>
       </div>
    </div>
+   <script src="script.js"></script>
 </body>
 </html>
