@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>◆◆My Personal Room◆◆</title>
+    <title>◆◆Lily's Private Room◆◆</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,22 +18,52 @@
             <h1>～～ようこそリリィの部屋へ～～</h1>
          </marquee>
          
-         <div style="margin: 30px auto; border: 1px double #999; width: fit-content; padding: 10px; background-color: #fff;">
+         <div style="margin: 0px auto; border: 1px double #999; width: fit-content; padding: 8px; background-color: #fff;">
             あなたは<b> 0000 </b>番目の来訪者です！<br>
-            <span style="font-size: 10px;">（キリ番踏んだら掲示板に報告してね！）</span>
+            <span style="font-size: 10px;">（キリ番踏んだら掲示板に報告してね）まだ未実装</span>
          </div>
 
          <canvas id="backgroundCanvas" width="800" height="600" style="position: absolute; top: 0; left: 0; z-index: -1;"></canvas>
 
-         <div style="margin: 30px auto; border: 1px double #999; width: fit-content; padding: 50px; background-color: #fff;">
+         <div style="margin: 10px auto; border: 1px double #999; width: fit-content; padding: 20px; background-color: #fff;">
             <h1>現在 大工事中！！</h1>
-            <p>ただいまサイトの作成中です。<br>
-               いくつかのコンテンツが表示されないです。<br>
+            <p>ただいまサイトの作成中です。いくつかのコンテンツが表示されないです。<br>
                ご迷惑をおかけしますが、ご了承ください。</p>
          </div>
 
+         <!-- マスコットキャラクターエリア (メインコンテンツ内) -->
+         <div id="mascot-container" style="display: flex; justify-content: center; align-items: center; margin: 20px auto; gap: 20px;">
+            <div id="mascot-icon-wrapper" style="cursor: pointer;">
+               <img id="mascot-img" src="illust/ドットリリィ_1.png" alt="Lily Mascot" style="width: 80px; height: auto; border: 1px solid #999; padding: 5px; background: #fff;">
+               <div style="font-size: 10px; color: #666;">CLICK ME!</div>
+            </div>
+            <div id="mascot-bubble-box" style="border: 2px solid #000080; border-radius: 10px; background: #fff; padding: 15px; width: 300px; text-align: left; position: relative; min-height: 50px; box-shadow: 3px 3px 0px rgba(0,0,0,0.1);">
+               <div id="mascot-msg" style="font-size: 14px; margin-right: 20px;">こんにちは！</div>
+               <div id="mascot-next-btn" style="position: absolute; bottom: 5px; right: 10px; cursor: pointer; color: #000080; font-weight: bold; animation: blink 1s infinite;">▼</div>
+            </div>
+         </div>
+
+         <!-- 簡易掲示板風メッセージコンテナ -->
+         <div id="retro-bbs-container" class="win95-window" style="position: static; margin: 30px auto; width: 450px;">
+            <div class="win95-titlebar">
+               <span class="win95-title">簡易掲示板 - メッセージを送る</span>
+            </div>
+            <div class="win95-content" style="background-color: #c0c0c0;">
+               <div id="bbs-output" style="background: #fff; border: 2px inset #ffffff; height: 120px; overflow-y: auto; padding: 5px; font-size: 12px; text-align: left; margin-bottom: 10px; font-family: 'MS PGothic', sans-serif;">
+                  <div style="color: #666;">--- メッセージ履歴 ---</div>
+               </div>
+               <div style="display: flex; gap: 5px;">
+                  <input type="text" id="bbs-input" placeholder="メッセージを入力..." style="flex-grow: 1; border: 2px inset #ffffff; padding: 3px; font-family: 'MS PGothic', sans-serif;">
+                  <button id="bbs-submit" class="win95-button" style="padding: 2px 10px;">送信</button>
+               </div>
+               <div style="font-size: 10px; color: #333; margin-top: 5px; text-align: left;">
+                  ※特定のキーワードに私(リリィ)が反応するかも？
+               </div>
+            </div>
+         </div>
+
          <!-- アシスタントダイアログ (絶対配置・アイコンスペース付き) -->
-         <div id="assistant-window" class="win95-window" style="top: 400px; left: 500px;">
+         <div id="assistant-window" class="win95-window" style="top: 400px; left: 400px;">
             <div class="win95-titlebar">
                <span class="win95-title">Assistant - Conversation</span>
                <div class="win95-close">×</div>
@@ -65,6 +95,7 @@
          </p>
       </div>
    </div>
+
    <script src="script.js"></script>
 </body>
 </html>

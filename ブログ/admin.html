@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Post Creator Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: #f7fafc;
+            color: #2d3748;
+        }
+        .editor-side {
+            width: 45%;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        .preview-side {
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            background: #edf2f7;
+            overflow-y: auto;
+            position: relative;
+        }
+        .preview-side h2.preview-header {
+            margin: 0;
+            padding: 10px 20px;
+            background: #4a5568;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .preview-frame-wrapper {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+        .preview-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        h1.dashboard-title {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #2b6cb0;
+            border-bottom: 2px solid #ebf8ff;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #4a5568;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .form-group textarea {
+            height: 250px;
+            font-family: 'Courier New', Courier, monospace;
+            resize: vertical;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button.btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.2s;
+        }
+        button.btn-primary {
+            background: #3182ce;
+            color: white;
+        }
+        button.btn-primary:hover { background: #2b6cb0; }
+        button.btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        button.btn-secondary:hover { background: #cbd5e0; }
+
+        .output-box {
+            margin-top: 25px;
+            background: #1a202c;
+            color: #cbd5e0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            display: none;
+        }
+        .output-box h4 {
+            margin-top: 0;
+            color: #63b3ed;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .output-box pre {
+            margin: 0;
+            white-space: pre-wrap;
+            background: #2d3748;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 150px;
+            overflow-y: auto;
+            user-select: all;
+        }
+        .copy-hint {
+            font-size: 10px;
+            color: #a0aec0;
+            cursor: pointer;
+        }
+        .copy-hint:hover { color: white; }
+    </style>
+</head>
+<body>
+
+<div class="editor-side">
+    <h1 class="dashboard-title">📝 ブログ記事 作成ダッシュボード</h1>
+    
+    <div class="form-group">
+        <label for="post-title">記事タイトル</label>
+        <input type="text" id="post-title" placeholder="記事のタイトルを入力..." value="新らしい日記のタイトル">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="post-date">投稿日付</label>
+            <input type="date" id="post-date">
+        </div>
+        <div class="form-group">
+            <label for="post-category">カテゴリ</label>
+            <select id="post-category">
+                <option value="dialy">日記 (dialy)</option>
+                <option value="creation">創作うんぬん (creation)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="post-tags">タグ</label>
+            <input type="text" id="post-tags" placeholder="ゲーム, 試運転, 日常など" value="日記">
+        </div>
+        <div class="form-group">
+            <label for="post-filename">保存ファイル名 (拡張子なし)</label>
+            <input type="text" id="post-filename" placeholder="20260618 など">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="post-content">記事本文 (HTMLタグ・改行使用可)</label>
+        <textarea id="post-content" placeholder="ここが本文になります。改行は<br>を入れるか、プログラムで自動変換されます。">今日はパズルゲームの新しい仕組みを開発しました！&#10;なかなかいい感じの環境になってきて嬉しいです。&#10;明日もがんばります。</textarea>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" onclick="generateOutput()">コードを出力・エクスポート</button>
+    </div>
+
+    <div id="output-area" class="output-box">
+        <h4>■ 1. 記事ファイル用の全コード <span class="copy-hint" onclick="copyText('article-code')">[クリックで全選択]</span></h4>
+        <pre id="article-code"></pre>
+        <p id="file-save-path" style="font-size:11px; margin: 5px 0 15px 0; color: #a0aec0;"></p>
+
+        <h4>■ 2. index.html の一覧テーブルに追加する行 <span class="copy-hint" onclick="copyText('index-row-code')">[クリックで全選択]</span></h4>
+        <pre id="index-row-code"></pre>
+    </div>
+</div>
+
+<div class="preview-side">
+    <h2 class="preview-header">
+        <span>👁️ リアルタイム プレビュー画面 (ブログ本体のスタイル適用)</span>
+        <span style="font-size: 11px; opacity: 0.8;">※右側のレイアウト枠内で描画中</span>
+    </h2>
+    <div class="preview-frame-wrapper">
+        <div class="preview-container" id="live-blog-preview">
+            <!-- ライブプレビューがここに挿入されます -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // 日付の初期値を今日にする
+    document.getElementById('post-date').valueAsDate = new Date();
+    
+    // 日付が変わったらファイル名の初期値も連動して更新
+    document.getElementById('post-date').addEventListener('change', function() {
+        const d = new Date(this.value);
+        if(!isNaN(d.getTime())) {
+            const yyyymmdd = d.getFullYear() + String(d.getMonth()+1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+            document.getElementById('post-filename').value = yyyymmdd;
+        }
+    });
+    // 初回のファイル名セット
+    const d = new Date();
+    document.getElementById('post-filename').value = d.getFullYear() + String(d.getMonth()+1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+
+    // リアルタイムプレビューの監視
+    const inputs = ['post-title', 'post-content', 'post-date', 'post-category'];
+    inputs.forEach(id => {
+        document.getElementById(id).addEventListener('input', updateLivePreview);
+    });
+    document.getElementById('post-category').addEventListener('change', updateLivePreview);
+
+    function updateLivePreview() {
+        const title = document.getElementById('post-title').value || '無題';
+        const content = document.getElementById('post-content').value.replace(/\n/g, '<br>');
+        const categoryLabel = document.getElementById('post-category').value === 'dialy' ? '日記' : '創作うんぬん';
+        
+        // メインブログの骨組みを模倣したプレビュー表示
+        document.getElementById('live-blog-preview').innerHTML = `
+            <div style="border-bottom: 2px solid #000080; padding-bottom: 10px; margin-bottom: 20px;">
+               <span style="font-size: 24px; font-weight: bold; color: #000080;">MY BLOG</span>
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <div style="flex-grow: 1; text-align: left;">
+                    <section style="background: #fff; padding: 15px; border: 1px dashed #999;">
+                        <h2 style="font-size: 18px; color: #333; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 5px;">${categoryLabel}</h2>
+                        <h3 style="font-size: 20px; color: #000080; margin-top: 10px;">${title}</h3>
+                        <p style="font-size: 14px; line-height: 1.6; min-height: 100px; color: #2d3748;">${content}</p>
+                    </section>
+                </div>
+                <div style="width: 150px; background: #f0f0f0; padding: 10px; font-size: 12px; border-left: 1px dotted #999; text-align: left;">
+                    <h4 style="margin: 0 0 10px 0; color: #000080;">サイドバー</h4>
+                    <p style="margin: 4px 0;"><a href="#" onclick="return false;">ホーム</a></p>
+                    <p style="margin: 4px 0;"><a href="#" onclick="return false;">日記事</a></p>
+                    <p style="margin: 4px 0;"><a href="#" onclick="return false;">創作うんぬん</a></p>
+                </div>
+            </div>
+        `;
+    }
+
+    function generateOutput() {
+        const title = document.getElementById('post-title').value || '無題';
+        const rawContent = document.getElementById('post-content').value;
+        const content = rawContent.replace(/\n/g, '\n            <br>');
+        const dateInput = document.getElementById('post-date').value;
+        const category = document.getElementById('post-category').value;
+        const tags = document.getElementById('post-tags').value || '日常';
+        const filename = document.getElementById('post-filename').value || 'post';
+
+        // 日付のフォーマット整形
+        const d = new Date(dateInput);
+        const formattedDate = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+
+        // 階層の深さ調整（dialyの中にさらに日付フォルダを作る形式、または直下にする形式の調整）
+        // 現状のブログ構造に合わせて、親のstyle.cssへの参照を変更可能にする
+        const cssPath = "../../style.css"; 
+
+        // 1. Standalone Article Code Generation
+        const articleHtml = `<!DOCTYPE html>
+<html lang="ja">
+   <head>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="${cssPath}">
+      <title>${title}</title>
+   </head>
+   <body>
+      <header>
+         <h1>${title}</h1>
+         <nav>
+            <ul>
+               <li><a href="#dialy">Dialy</a></li>
+               <li><a href="#creation">Creation</a></li>
+            </ul>
+         </nav>
+      </header>
+      <main>
+         <section>
+            <h2>${category === 'dialy' ? '日記' : '創作うんぬん'}</h2>
+            <p>${content}
+            </p>
+         </section>
+         <div class="sidebar">
+            <h3>サイドバー</h3>
+            <p><a href="../../index.html">ホーム</a></p>
+            <p><a href="../../index.html">日記事</a></p>
+            <p><a href="../../index.html">創作うんぬん</a></p>
+         </div>
+         <footer>
+            <p><small>ねぎ塩の畑</small></p>
+         </footer>
+      </main>
+   </body>
+</html>`;
+
+        // 2. Index Row Generation
+        // カテゴリごとにリンクパスが変わるように調整
+        const linkPath = `${category}/${filename}.html`;
+        const indexRowHtml = `<tr><td>${formattedDate}</td><td><a href="${linkPath}">${title}</a></td><td>${tags}</td></tr>`;
+
+        // ドキュメントに出力
+        document.getElementById('article-code').innerText = articleHtml;
+        document.getElementById('index-row-code').innerText = indexRowHtml;
+        
+        document.getElementById('file-save-path').innerText = `※このファイルを「ブログ/${category}/${filename}.html」として新規作成して保存してください。`;
+        document.getElementById('output-area').style.display = 'block';
+    }
+
+    function copyText(id) {
+        const el = document.getElementById(id);
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
+    // 初回ロード時にプレビューをレンダリング
+    updateLivePreview();
+</script>
+
+</body>
+</html>

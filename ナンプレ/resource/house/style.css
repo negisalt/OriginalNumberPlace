@@ -43,7 +43,7 @@ iframe {
 .right h1 {
   font-size: 24px;
   color: #000080; /* ネイビーブルー */
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .right b {
@@ -243,5 +243,76 @@ hr {
 h1 {
   font-size: 100px;
   color: #000080; /* ネイビーブルー */
-  margin-top: 30px;
+  margin-top: 0px;
+}
+
+/** マスコットキャラクターエリア **/
+#character-area {
+  position: fixed;
+  bottom: 20px;
+  left: 260px; /* サイドバー(240px)を避ける */
+  display: flex;
+  align-items: flex-end;
+  z-index: 9999; /* 最前面に配置 */
+  pointer-events: auto;
+}
+
+#character-icon {
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+  transition: transform 0.2s;
+}
+
+#character-icon:hover {
+  transform: scale(1.05);
+}
+
+#speech-bubble {
+  background: white;
+  border: 2px solid #000080;
+  padding: 10px 15px;
+  border-radius: 15px;
+  position: relative;
+  margin-left: 15px;
+  margin-bottom: 40px;
+  min-width: 150px;
+  max-width: 250px;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+  display: none; /* 初期状態は非表示 */
+  z-index: 10000;
+}
+
+#speech-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  bottom: 10px;
+  border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+}
+
+#speech-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  margin-right: 15px;
+}
+
+#speech-next {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  cursor: pointer;
+  color: #000080;
+  font-size: 12px;
+  animation: mascot-blink 1s infinite;
+}
+
+@keyframes mascot-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
 }

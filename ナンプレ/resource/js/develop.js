@@ -4,6 +4,7 @@ let currentBoard = [];
 let pieceLayout = [];
 let selectedCell = null;
 let currentDifficulty = 'home';
+let specialTimer = null;
 
 const DIFFICULTY_SETTINGS = {
     'home': { clues: 36, name: 'Home', label: 'ホーム' },
@@ -11,8 +12,12 @@ const DIFFICULTY_SETTINGS = {
     'normal': { clues: 16, name: 'Normal', label: 'ノーマル' },
     'hard': { clues: 12, name: 'Hard', label: 'ハード' },
     'devil': { clues: 9, name: 'Devil', label: 'デビル' },
-    'special': { clues: 7, name: 'Special', label: 'スペシャル' }
+    'special': { clues: 7, name: 'Special', label: 'スペシャル' },
+    'untitle': { clues: 5, name: 'Untitle', label: '？？？' }
 };
+
+let inputSequence = "";
+const SECRET_CODE = "46153346"; // この順番で叩くと遷移
 
 /**
  * Detects the difficulty from the URL hash
@@ -217,6 +222,17 @@ function selectCell(r, c) {
  * Inputs a number into the selected cell
  */
 function inputNumber(num) {
+    if (num !== null) {
+        inputSequence += num;
+        if (inputSequence.endsWith(SECRET_CODE)) {
+            inputSequence = "";
+            window.location.hash = "untitle";
+            return;
+        }
+        // 長くなりすぎないように制限
+        if (inputSequence.length > 20) inputSequence = inputSequence.substring(10);
+    }
+
     if (!selectedCell) return;
     const { r, c } = selectedCell;
     if (initialBoard[r][c] !== 0) return;
@@ -326,6 +342,9 @@ window.addEventListener('DOMContentLoaded', () => {
 function handleDifficultyChange() {
     currentDifficulty = detectDifficulty();
     
+    // 隠しモード（untitle）の演出適用
+    applyBossModeVisuals(currentDifficulty === 'untitle');
+
     // Update active class in sidebar
     const links = document.querySelectorAll('#difficulty-list a');
     links.forEach(link => {
@@ -339,4 +358,32 @@ function handleDifficultyChange() {
     const settings = DIFFICULTY_SETTINGS[currentDifficulty];
     document.querySelector('header h1').textContent = `オリジナルナンプレ - ${settings.label}`;
     document.title = `オリジナルナンプレ - ${settings.label}`;
+
+    // SPECIAL難易度の場合のタイマー設定
+    if (currentDifficulty === 'special') {
+        startSpecialTimer();
+    } else {
+        stopSpecialTimer();
+    }
+}
+
+/**
+ * 20秒後にアラートを出してページを遷移させるタイマー
+ */
+function startSpecialTimer() {
+    if (specialTimer) clearTimeout(specialTimer);
+    specialTimer = setTimeout(() => {
+        // メッセージ内容は後でユーザーが編集可能
+        alert("？？？：警告。立ち入り禁止エリアに長時間滞在しました。");
+        alert("？？？：安全のため、元のページに強制送還します。");
+        alert("？？？：さようなら。");
+        window.location.href = "../../ブログ/dialy/aaa.html";
+    }, 20000);
+}
+
+function stopSpecialTimer() {
+    if (specialTimer) {
+        clearTimeout(specialTimer);
+        specialTimer = null;
+    }
 }
