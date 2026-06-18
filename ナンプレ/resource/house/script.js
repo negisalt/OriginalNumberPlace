@@ -8,14 +8,14 @@
     const dialogueData = [
         { 
             name: "リリィ", 
-            text: "……あ、……こんにちは、来訪者。<br>よくここまで辿り着きましたね。",
+            text: "……あ、……こんにちは、来訪者。<br>よくここまで辿り着けましたね。",
             icon: "！",
             pos: { top: "400px", left: "500px" }
         },
         { 
             name: "リリィ", 
             text: "ここは私の「秘密の部屋」……。<br>……なんて、ただの工事中のページですけど。",
-            icon: "？"
+            icon: "…"
         },
         { 
             name: "リリィ", 
@@ -32,6 +32,36 @@
             text: "……あ、そうでした。<br>あなたに手伝っていただきたいことがあるんでした。",
             icon: "💡"
         },
+        { 
+            name: "リリィ", 
+            text: "このサイトに突如あらわれた広告を消していただきたいんです。",
+            icon: "@"
+        },
+        { 
+            name: "リリィ", 
+            text: "本当は私が対処すればよいのですが……、このサイトを維持するのが大変でここを離れられないんです……。",
+            icon: "💦"
+        },
+        { 
+            name: "リリィ", 
+            text: "手伝っていただけるとの事なのでさっそく仕事をお願いします。",
+            icon: "📚"
+        },
+        { 
+            name: "リリィ", 
+            text: "左のサイドバーにこのwebサイトのリンク一覧の<b>ABOUT</b>からこのサイトの概要のページを開いてほしいです。",
+            icon: "🔍"
+        },
+        { 
+            name: "リリィ", 
+            text: "このサイトを調査する上で重要な情報があるかもしれません。",
+            icon: "！"
+        },
+        { 
+            name: "リリィ", 
+            text: "それでは、よろしくお願いしますね。",
+            icon: "♪"
+        },
     ];
 
     let currentDialogueIndex = 0;
@@ -39,7 +69,7 @@
     function nextDialogue() {
         currentDialogueIndex++;
         if (currentDialogueIndex >= dialogueData.length) {
-            currentDialogueIndex = 0; // 最初に戻る
+            currentDialogueIndex = dialogueData.length; // 最初に戻る
         }
         updateDialogue();
     }

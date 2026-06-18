@@ -186,11 +186,11 @@ const ArgSystem = {
 const Stories = {
     // The initial event that triggers in special difficulty
     mysteriousAdEvent: [
-        { type: 'wait', ms: 1000 },
+        { type: 'wait', ms: 100 },
         { type: 'showAd' },
-        { type: 'wait', ms: 800 },
+        { type: 'wait', ms: 1500 },
         { type: 'hideAd' },
-        { type: 'wait', ms: 800 },
+        { type: 'wait', ms: 600 },
         { type: 'text', content: "おかしいですね...。このサイトには広告はないはずなのですが...。" },
         { type: 'text', content: "すみません、ちょっとこのサイトの様子が変みたいです。<br>良ければ一緒に調査を手伝っていただけませんか？" },
         { type: 'redirectChoice', content: "こちらのページに来ていただけますか？", url: 'resource/house/house.html' }
