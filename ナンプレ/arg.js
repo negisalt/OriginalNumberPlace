@@ -188,7 +188,7 @@ const Stories = {
     mysteriousAdEvent: [
         { type: 'wait', ms: 100 },
         { type: 'showAd' },
-        { type: 'wait', ms: 1500 },
+        { type: 'wait', ms: 2500 },
         { type: 'hideAd' },
         { type: 'wait', ms: 600 },
         { type: 'text', content: "おかしいですね...。このサイトには広告はないはずなのですが...。" },
