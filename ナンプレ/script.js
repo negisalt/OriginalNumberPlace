@@ -5,6 +5,8 @@ let pieceLayout = [];
 let selectedCell = null;
 let currentDifficulty = 'tutorial';
 let clearCount = parseInt(localStorage.getItem('sudoku_clear_count') || '0');
+let timerInterval = null;
+let secondsElapsed = 0;
 
 const DIFFICULTY_SETTINGS = {
     'tutorial': { clues: 11, name: 'Tutorial', label: 'チュートリアル' },
@@ -253,6 +255,7 @@ function checkSolution() {
     }
 
     if (isCorrect) {
+        stopTimer();
         updateMessage("正解！おめでとうございます。<br>君ならもっと難しい問題も解けるかもしれないね！");
         updateClearCount(true);
         alert("クリア");
@@ -416,6 +419,7 @@ function resetBoard() {
     currentBoard = JSON.parse(JSON.stringify(initialBoard));
     initGrid();
     updateMessage("盤面を最初に戻しました！頑張ってくださいね。");
+    startTimer();
 }
 
 /**
@@ -436,6 +440,7 @@ function newGame() {
         initGrid();
         loader.style.display = 'none';
         updateMessage("新しい盤面が生成されました！挑戦してみてください！");
+        startTimer();
     }, 10);
 }
 
@@ -481,3 +486,26 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 20000); // 20 seconds
     }
 });
+
+// --- タイマー制御用関数群 ---
+function startTimer() {
+    clearInterval(timerInterval);
+    secondsElapsed = 0;
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        secondsElapsed++;
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(secondsElapsed / 60);
+    const seconds = secondsElapsed % 60;
+    const formattedTime = 
+        String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    document.getElementById('timer').textContent = formattedTime;
+}

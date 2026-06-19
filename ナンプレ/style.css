@@ -107,6 +107,11 @@ body {
     box-shadow: 0 4px 6px rgba(74, 144, 226, 0.2);
 }
 
+#timer-container {
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .game-area {
     flex-grow: 1;
     display: flex;
