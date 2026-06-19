@@ -13,11 +13,11 @@ const DIFFICULTY_SETTINGS = {
     'hard': { clues: 12, name: 'Hard', label: 'ハード' },
     'devil': { clues: 9, name: 'Devil', label: 'デビル' },
     'special': { clues: 7, name: 'Special', label: 'スペシャル' },
-    'untitle': { clues: 5, name: 'Untitle', label: '？？？' }
+    'untitle': { clues: 15, name: 'Untitle', label: 'Security room' }
 };
 
 let inputSequence = "";
-const SECRET_CODE = "46153346"; // この順番で叩くと遷移
+const SECRET_CODE = "461533"; // この順番で叩くと遷移
 
 /**
  * Detects the difficulty from the URL hash
@@ -268,8 +268,13 @@ function checkSolution() {
     }
 
     if (isCorrect) {
-        updateMessage("正解！おめでとうございます。<br>君ならもっと難しい問題も解けるかもしれないね！");
-        alert("クリア");
+        if (currentDifficulty === 'untitle') {
+            updateMessage("？？？：お見事。隠された真実に辿り着いたようですね。");
+            alert("クリアしたことによる、この後のストーリーはまだ未実装です。ごめんね。by開発者");
+        } else {
+            updateMessage("正解！おめでとうございます。<br>君ならもっと難しい問題も解けるかもしれないね！");
+            alert("クリア");
+        }
     } else {
         updateMessage("残念...どこか間違っているみたいです...。<br>盤面をもう一度見直してみましょう。");
     }
@@ -387,3 +392,15 @@ function stopSpecialTimer() {
         specialTimer = null;
     }
 }
+
+/**
+ * 隠しモード（untitle）のビジュアル演出を適用・解除する
+ */
+function applyBossModeVisuals(isBossMode) {
+    if (isBossMode) {
+        document.documentElement.classList.add('boss-mode');
+    } else {
+        document.documentElement.classList.remove('boss-mode');
+    }
+}
+
